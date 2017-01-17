@@ -130,7 +130,7 @@ namespace UnitTestCSharp {
         public static string unit_test = "unit test";
 
         //variant test section - CSharp only provide unicode input, absolutely no ansi support at all.
-        //public static string variantFormatExpected = "慁 1.000000 2.000002 1 25 50 4294967295 2147483647 2147483647 4294967295 aA";
+        //public static string variantFormatExpected = "Aa 1.000000 2.000002 1 25 50 4294967295 2147483647 2147483647 4294967295 aA";
         //public static string variantFormat = "{0:s} {2:f} {3:f} {4:hhd} {5:hd} {6:hu} {8:u} {7:d} {9:ld} {10:lu} {1:s}";
         public static string variantFormatExpected = "1.000000 2.000002 1 25 50 4294967295 2147483647 2147483647 4294967295 aA";
         public static string variantFormat = "{2:f} {3:f} {4:hhd} {5:hd} {6:hu} {8:u} {7:d} {9:ld} {10:lu} {1:s}";
