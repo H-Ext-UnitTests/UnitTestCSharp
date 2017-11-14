@@ -331,16 +331,16 @@ namespace UnitTestCSharp {
                     Addon_API.e_boolean boolean = pIUtil.m_shiftStrW(matterStr, 1, 3, 1, false);
                     if (boolean != Addon_API.e_boolean.TRUE)
                         throw new ArgumentException();
-                    if (!pIUtil.m_findSubStrFirstW(MatterStr, matterStr.ToString()))
+                    if (!pIUtil.m_findSubStrFirstW(matterStr.ToString(), MatterStr))
                         throw new ArgumentException();
-                    if (pIUtil.m_findSubStrFirstW(MattarStr, matterStr.ToString()))
+                    if (pIUtil.m_findSubStrFirstW(matterStr.ToString(), MattarStr))
                         throw new ArgumentException();
                     boolean = pIUtil.m_shiftStrW(matterStr, 1, 1, 3, true);
                     if (boolean != Addon_API.e_boolean.TRUE)
                         throw new ArgumentException();
-                    if (!pIUtil.m_findSubStrFirstW(MattarStr, matterStr.ToString()))
+                    if (!pIUtil.m_findSubStrFirstW(matterStr.ToString(), MattarStr))
                         throw new ArgumentException();
-                    if (pIUtil.m_findSubStrFirstW(MatterStr, matterStr.ToString()))
+                    if (pIUtil.m_findSubStrFirstW(matterStr.ToString(), MatterStr))
                         throw new ArgumentException();
 
                     //No reason to have 2 matter string since ANSII and Unicode are done by C# itself.
@@ -349,16 +349,16 @@ namespace UnitTestCSharp {
                     boolean = pIUtil.m_shiftStrA(matterStr, 1, 3, 1, false);
                     if (boolean != Addon_API.e_boolean.TRUE)
                         throw new ArgumentException();
-                    if (!pIUtil.m_findSubStrFirstA(MatterStr, matterStr.ToString()))
+                    if (!pIUtil.m_findSubStrFirstA(matterStr.ToString(), MatterStr))
                         throw new ArgumentException();
-                    if (pIUtil.m_findSubStrFirstA(MattarStr, matterStr.ToString()))
+                    if (pIUtil.m_findSubStrFirstA(matterStr.ToString(), MattarStr))
                         throw new ArgumentException();
                     boolean = pIUtil.m_shiftStrA(matterStr, 1, 1, 3, true);
                     if (boolean != Addon_API.e_boolean.TRUE)
                         throw new ArgumentException();
-                    if (!pIUtil.m_findSubStrFirstA(MattarStr, matterStr.ToString()))
+                    if (!pIUtil.m_findSubStrFirstA(matterStr.ToString(), MattarStr))
                         throw new ArgumentException();
-                    if (pIUtil.m_findSubStrFirstA(MatterStr, matterStr.ToString()))
+                    if (pIUtil.m_findSubStrFirstA(matterStr.ToString(), MatterStr))
                         throw new ArgumentException();
 
                     testBStrW.Remove(0, testBStrW.Length);
