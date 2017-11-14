@@ -7,7 +7,7 @@ Designed to test against Add-on API for any possible exploit and apply internal 
 
 1. Uncomment specific definition you want to test against API by following location below.
   * UnitTestCSharp.cs file.
-  * UnitTestCSharp properties under Build Tab's "Conditional compilation symbols" textfield. (This require defintion insert.)
+  * UnitTestCSharp properties under Build Tab's "Conditional compilation symbols" textfield. (This require definition insert.)
 2. Compile it.
 3. Use Add-on Converter application to convert it into eao format.
 4. Copy UnitTestCSharp.eao file into H-Ext's plugins folder.
