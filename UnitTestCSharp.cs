@@ -766,6 +766,11 @@ namespace UnitTestCSharp {
                         throw new ArgumentException();
                     if (!pICommand.m_load_from_file(hash, eaoLoadFileStr, plI, Addon_API.MSG_PROTOCOL.MP_RCON))
                         throw new ArgumentException();
+
+                    // Proper remove command when done testing.
+                    if (!pICommand.m_delete(hash, eao_testExecutePtr, eaoTestExecuteStr))
+                        throw new ArgumentException();
+
                     MessageBox.Show("ICommand API has passed unit test.", "PASSED - ICommand", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 } else
                     throw new ArgumentException();
@@ -844,7 +849,7 @@ namespace UnitTestCSharp {
                     Addon_API.PlayerInfoList plList = new Addon_API.PlayerInfoList();
                     Addon_API.PlayerInfo plINull = new Addon_API.PlayerInfo();
 
-                    short totalPlayers = pIPlayer.m_get_str_to_player_list("*", ref plList, null);
+                    ushort totalPlayers = pIPlayer.m_get_str_to_player_list("*", ref plList, null);
                     if (totalPlayers == 0)
                         throw new ArgumentException();
                     Addon_API.PlayerInfo plITest = new Addon_API.PlayerInfo(), plITest2 = new Addon_API.PlayerInfo();
@@ -1235,7 +1240,8 @@ namespace UnitTestCSharp {
         }
 #if EXT_HKTIMER
         [DllExport("EXTOnTimerExecute", CallingConvention = CallingConvention.Cdecl)]
-        public static void EXTOnTimerExecute(UInt32 id) {
+        [return: MarshalAs(UnmanagedType.I1)]
+        public static bool EXTOnTimerExecute(UInt32 id, UInt32 count) {
             try { 
                 if (TimerID[0] == id) {
                     if (TimerTickStart == 0) {
@@ -1276,6 +1282,7 @@ namespace UnitTestCSharp {
             } catch (ArgumentException) {
                 MessageBox.Show("ITimer API has failed unit test.", "ERROR - ITimer", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return false; //Tell H-Ext not to repeat timer.
         }
         [DllExport("EXTOnTimerCancel", CallingConvention = CallingConvention.Cdecl)]
         public static void EXTOnTimerCancel(UInt32 id) {
