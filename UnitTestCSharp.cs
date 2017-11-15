@@ -848,11 +848,11 @@ namespace UnitTestCSharp {
                     if (totalPlayers == 0)
                         throw new ArgumentException();
                     Addon_API.PlayerInfo plITest = new Addon_API.PlayerInfo(), plITest2 = new Addon_API.PlayerInfo();
-                    if (pIPlayer.m_get_m_index(2, ref plITest))
+                    if (pIPlayer.m_get_m_index(2, ref plITest, true))
                         throw new ArgumentException();
-                    if (pIPlayer.m_get_m_index(1, ref plITest))
+                    if (pIPlayer.m_get_m_index(1, ref plITest, true))
                         throw new ArgumentException();
-                    if (!pIPlayer.m_get_m_index(0, ref plITest))
+                    if (!pIPlayer.m_get_m_index(0, ref plITest, true))
                         throw new ArgumentException();
                     if (pIPlayer.m_get_id(200, ref plITest2))
                         throw new ArgumentException();
@@ -1003,7 +1003,7 @@ namespace UnitTestCSharp {
             try {
                 if (pIAdmin.isNotNull() && pIPlayer.isNotNull()) {
                     Addon_API.PlayerInfo plIMockup = new Addon_API.PlayerInfo();
-                    if (!pIPlayer.m_get_m_index(0, ref plIMockup))
+                    if (!pIPlayer.m_get_m_index(0, ref plIMockup, true))
                     throw new ArgumentException();
 
                     if (pIAdmin.m_is_username_exist(username) != Addon_API.e_boolean.FALSE)
