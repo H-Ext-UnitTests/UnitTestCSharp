@@ -590,26 +590,26 @@ namespace UnitTestCSharp {
                     if (pICIniFile.m_section_exist(sectors.sect_name5))
                         throw new ArgumentException();
 
-                    if (pICIniFile.m_key_exist(str1_0, sectors.sect_name1))
+                    if (pICIniFile.m_key_exist(sectors.sect_name1, str1_0))
                         throw new ArgumentException();
-                    if (pICIniFile.m_key_exist(str1_1, sectors.sect_name2))
+                    if (pICIniFile.m_key_exist(sectors.sect_name2, str1_1))
                         throw new ArgumentException();
-                    if (pICIniFile.m_key_exist(str1_0, sectors.sect_name3))
+                    if (pICIniFile.m_key_exist(sectors.sect_name3, str1_0))
                         throw new ArgumentException();
-                    if (pICIniFile.m_key_exist(str1_2, sectors.sect_name4))
+                    if (pICIniFile.m_key_exist(sectors.sect_name4, str1_2))
                         throw new ArgumentException();
-                    if (pICIniFile.m_key_exist(str1_3, sectors.sect_name5))
+                    if (pICIniFile.m_key_exist(sectors.sect_name5, str1_3))
                         throw new ArgumentException();
 
-                    if (!pICIniFile.m_value_set(str1_0, firstUnitTestCStr, sectors.sect_name1))
+                    if (!pICIniFile.m_value_set(sectors.sect_name1, str1_0, firstUnitTestCStr))
                         throw new ArgumentException();
-                    if (!pICIniFile.m_value_set(str1_1, firstUnitTestCStr, sectors.sect_name2))
+                    if (!pICIniFile.m_value_set(sectors.sect_name2, str1_1, firstUnitTestCStr))
                         throw new ArgumentException();
-                    if (!pICIniFile.m_value_set(str1_0, firstUnitTestCStr, sectors.sect_name3))
+                    if (!pICIniFile.m_value_set(sectors.sect_name3, str1_0, firstUnitTestCStr))
                         throw new ArgumentException();
-                    if (pICIniFile.m_value_set(str1_2, firstUnitTestCStr, sectors.sect_name4))
+                    if (pICIniFile.m_value_set(sectors.sect_name4, str1_2, firstUnitTestCStr))
                         throw new ArgumentException();
-                    if (pICIniFile.m_value_set(str1_3, firstUnitTestCStr, sectors.sect_name5))
+                    if (pICIniFile.m_value_set(sectors.sect_name5, str1_3, firstUnitTestCStr))
                         throw new ArgumentException();
                     retCode++;
                     switch(retCode) {
@@ -654,34 +654,34 @@ namespace UnitTestCSharp {
                     if (!pICIniFile.m_section_exist(sectors.sect_name3))
                         throw new ArgumentException();
 
-                    if (!pICIniFile.m_key_exist(str1_0, sectors.sect_name1))
+                    if (!pICIniFile.m_key_exist(sectors.sect_name1, str1_0))
                         throw new ArgumentException();
-                    if (!pICIniFile.m_key_exist(str1_1, sectors.sect_name2))
+                    if (!pICIniFile.m_key_exist(sectors.sect_name2, str1_1))
                         throw new ArgumentException();
-                    if (pICIniFile.m_key_exist(str1_0, sectors.sect_name3))
+                    if (pICIniFile.m_key_exist(sectors.sect_name3, str1_0))
                         throw new ArgumentException();
-                    if (pICIniFile.m_key_exist(str1_2, sectors.sect_name4))
+                    if (pICIniFile.m_key_exist(sectors.sect_name4, str1_2))
                         throw new ArgumentException();
-                    if (pICIniFile.m_key_exist(str1_3, sectors.sect_name5))
+                    if (pICIniFile.m_key_exist(sectors.sect_name5, str1_3))
                         throw new ArgumentException();
 
-                    if (!pICIniFile.m_value_set(str1_0, firstUnitTestCStr, sectors.sect_name1))
+                    if (!pICIniFile.m_value_set(sectors.sect_name1, str1_0, firstUnitTestCStr))
                         throw new ArgumentException();
-                    if (!pICIniFile.m_key_exist(str1_0, sectors.sect_name1))
+                    if (!pICIniFile.m_key_exist(sectors.sect_name1, str1_0))
                         throw new ArgumentException();
 
                     if (!pICIniFile.m_save())
                         throw new ArgumentException();
 
-                    if (!pICIniFile.m_key_delete(str1_0, sectors.sect_name1))
+                    if (!pICIniFile.m_key_delete(sectors.sect_name1, str1_0))
                         throw new ArgumentException();
-                    if (pICIniFile.m_key_exist(str1_0, sectors.sect_name1))
+                    if (pICIniFile.m_key_exist(sectors.sect_name1, str1_0))
                         throw new ArgumentException();
 
                     if (!pICIniFile.m_load())
                         throw new ArgumentException();
 
-                    if (!pICIniFile.m_key_exist(str1_0, sectors.sect_name1))
+                    if (!pICIniFile.m_key_exist(sectors.sect_name1, str1_0))
                         throw new ArgumentException();
 
                     retCode = 1;
@@ -693,12 +693,67 @@ namespace UnitTestCSharp {
 
                     if (iniFileDataStr.Length != retCode) //Does not required -1 after Length
                         throw new ArgumentException();
+
                     //retCode++; //Is not required.
-                    do {
-                        retCode--;
-                        if (contentStr[(int)retCode] != iniFileDataStr[(int)retCode])
-                            throw new ArgumentException();
-                    } while (retCode!=0);
+
+                    if (!compareString(contentStr, iniFileDataStr, retCode))
+                        throw new ArgumentException();
+
+                    // Begin 0.5.3.4 Feature
+                    StringBuilder section_name = new StringBuilder(Addon_API.ICIniFileClass.INIFILESECTIONMAX);
+                    StringBuilder key_name = new StringBuilder(Addon_API.ICIniFileClass.INIFILEKEYMAX);
+                    StringBuilder value_name = new StringBuilder(Addon_API.ICIniFileClass.INIFILEVALUEMAX);
+                    uint ini_sec_count = pICIniFile.m_section_count();
+                    if (ini_sec_count != 3)
+                        throw new ArgumentException();
+
+                    uint ini_key_count;
+                    // Section 0 test
+                    if (!pICIniFile.m_section_index(0, section_name))
+                        throw new ArgumentException();
+                    if (!compareString(sectors.sect_name1, section_name.ToString(), uint.MaxValue))
+                        throw new ArgumentException();
+                    ini_key_count = pICIniFile.m_key_count(section_name.ToString());
+                    if (ini_key_count != 1)
+                        throw new ArgumentException();
+
+                    // Section 0 key 0 test
+                    if (!pICIniFile.m_key_index(section_name.ToString(), 0, key_name, value_name))
+                        throw new ArgumentException();
+                    if (!compareString(str1_0, key_name.ToString(), uint.MaxValue))
+                        throw new ArgumentException();
+                    if (!compareString(firstUnitTestCStr, value_name.ToString(), uint.MaxValue))
+                        throw new ArgumentException();
+
+                    // Section 1 test
+                    if (!pICIniFile.m_section_index(1, section_name))
+                        throw new ArgumentException();
+                    if (!compareString(sectors.sect_name2, section_name.ToString(), uint.MaxValue))
+                        throw new ArgumentException();
+                    ini_key_count = pICIniFile.m_key_count(section_name.ToString());
+                    if (ini_key_count != 1)
+                        throw new ArgumentException();
+
+                    // Section 1 key 0 test
+                    if (!pICIniFile.m_key_index(section_name.ToString(), 0, key_name, value_name))
+                        throw new ArgumentException();
+                    if (!compareString(str1_1, key_name.ToString(), uint.MaxValue))
+                        throw new ArgumentException();
+                    if (!compareString(firstUnitTestCStr, value_name.ToString(), uint.MaxValue))
+                        throw new ArgumentException();
+
+                    // Section 2 test
+                    if (!pICIniFile.m_section_index(2, section_name))
+                        throw new ArgumentException();
+                    if (!compareString(sectors.sect_name3, section_name.ToString(), uint.MaxValue))
+                        throw new ArgumentException();
+                    ini_key_count = pICIniFile.m_key_count(section_name.ToString());
+                    if (ini_key_count != 0)
+                        throw new ArgumentException();
+
+                    // End 0.5.3.4 Feature
+
+
                     if (!pICIniFile.m_delete_file(iniFileStr))
                         throw new ArgumentException();
 
@@ -847,7 +902,7 @@ namespace UnitTestCSharp {
                 if (pIPlayer.isNotNull()) {
                     StringBuilder testStr = new StringBuilder(64);
                     Addon_API.PlayerInfoList plList = new Addon_API.PlayerInfoList();
-                    Addon_API.PlayerInfo plINull = new Addon_API.PlayerInfo();
+                    //Addon_API.PlayerInfo plINull = new Addon_API.PlayerInfo();
 
                     ushort totalPlayers = pIPlayer.m_get_str_to_player_list("*", ref plList, null);
                     if (totalPlayers == 0)
@@ -1235,6 +1290,7 @@ namespace UnitTestCSharp {
             GC.Collect();
             return Addon_API.EAO_RETURN.OVERRIDE;
         }
+
         [DllExport("EXTOnEAOUnload", CallingConvention = CallingConvention.Cdecl)]
         public static void EXTOnEAOUnload() {
         }
@@ -1295,5 +1351,26 @@ namespace UnitTestCSharp {
             }
         }
 #endif
+        private static bool compareString(string str1, string str2, uint length) {
+            if (length == uint.MaxValue) {
+                if (str1.Length != str2.Length)
+                    return false;
+                length = 0;
+                while (str1.Length < length) {
+                    if (str1[(int)length] != str2[(int)length])
+                        return false;
+                    length++;
+                }
+            } else {
+                do {
+                    length--;
+                    if (str1[(int)length] != str2[(int)length])
+                        return false;
+                } while (length != 0);
+            }
+            return true;
+        }
     }
 }
+
+
