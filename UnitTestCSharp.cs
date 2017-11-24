@@ -1,27 +1,32 @@
-﻿//List of API support
+﻿
+// List of API support
 
-//#define EXT_IHALOENGINE
-//#define EXT_IOBJECT
-//#define EXT_IPLAYER
-//#define EXT_IADMIN
+// List of EXTs API support for all modes
+
+//#define EXT_IUTIL
 //#define EXT_ICOMMAND
-
-//#define EXT_IDATABASE             //Not included in this UnitTest.
-//#define EXT_IDATABASESTATEMENT    //Not included in this UnitTest.
-//#define EXT_HKDATABASE            //Not included in this UnitTest.
-
 //#define EXT_ICINIFILE
-
 //#define EXT_ITIMER
 //#define EXT_HKTIMER
 
-//#define EXT_IUTIL
+// List of EXTs API support for mp mode only
+
+//#define EXT_IHALOENGINE
+//#define EXT_IOBJECT         // Require EXT_IUTIL
+//#define EXT_IPLAYER         // Require EXT_IOBJECT; if define EXT_IADMIN, EXT_IPLAYER test will not process
+//#define EXT_IADMIN          // Require EXT_IUTIL
+
+// Not included in this UnitTest.
+//#define EXT_IDATABASE
+//#define EXT_IDATABASESTATEMENT
+//#define EXT_HKDATABASE
 
 //Future API support
-//#define EXT_INETWORK
-//#define EXT_ISOUND
-//#define EXT_IDIRECTX9
-//#define EXT_HKEXTERNAL
+
+//#define EXT_INETWORK              // Will require mp mode test and possible client?
+//#define EXT_ISOUND                // Require client side test only.
+//#define EXT_IDIRECTX9             // Require client side test only
+//#define EXT_HKEXTERNAL            // TBD
 
 #if DO_NOT_INCLUDE_THIS
 addon_info EXTPluginInfo = { "UnitTest C Sharp", "1.0.0.0",
