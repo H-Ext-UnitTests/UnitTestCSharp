@@ -41,7 +41,7 @@ addon_info EXTPluginInfo = { "UnitTest C Sharp", "1.0.0.0",
 #endif
 
 /*
- * Verification list as of 0.5.3.3
+ * Verification list as of 0.5.3.4
  *
  * EXT_IHALOENGINE          - Passed (except a few functions are not included in test.)
  * EXT_IOBJECT              - Passed (except a few functions are not included in test.)
