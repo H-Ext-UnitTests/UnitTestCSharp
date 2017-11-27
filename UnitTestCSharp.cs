@@ -167,13 +167,13 @@ namespace UnitTestCSharp {
         public static Addon_API.CmdFunc eao_testExecutePtr;
         public static Addon_API.CmdFunc eao_testExecuteOverridePtr;
         public static Addon_API.CmdFunc eao_testExecuteOverride2Ptr;
-        public static Addon_API.CMD_RETURN eao_testExecute([In] Addon_API.PlayerInfo plI, [In, Out] ref Addon_API.ArgContainerVars arg, [In] Addon_API.MSG_PROTOCOL protocolMsg, [In] uint idTimer, [In] boolOption showChat) {
+        public static Addon_API.CMD_RETURN eao_testExecute([In] Addon_API.PlayerInfo plI, [In, Out] ref Addon_API.ArgContainerVars arg, [In] Addon_API.MSG_PROTOCOL protocolMsg, [In] uint idTimer, [In, Out] boolOption showChat) {
             return Addon_API.CMD_RETURN.SUCC;
         }
-        public static Addon_API.CMD_RETURN eao_testExecuteOverride([In] Addon_API.PlayerInfo plI, [In, Out] ref Addon_API.ArgContainerVars arg, [In] Addon_API.MSG_PROTOCOL protocolMsg, [In] uint idTimer, [In] boolOption showChat) {
+        public static Addon_API.CMD_RETURN eao_testExecuteOverride([In] Addon_API.PlayerInfo plI, [In, Out] ref Addon_API.ArgContainerVars arg, [In] Addon_API.MSG_PROTOCOL protocolMsg, [In] uint idTimer, [In, Out] boolOption showChat) {
             return Addon_API.CMD_RETURN.SUCC;
         }
-        public static Addon_API.CMD_RETURN eao_testExecuteOverride2([In] Addon_API.PlayerInfo plI, [In, Out] ref Addon_API.ArgContainerVars arg, [In] Addon_API.MSG_PROTOCOL protocolMsg, [In] uint idTimer, [In] boolOption showChat) {
+        public static Addon_API.CMD_RETURN eao_testExecuteOverride2([In] Addon_API.PlayerInfo plI, [In, Out] ref Addon_API.ArgContainerVars arg, [In] Addon_API.MSG_PROTOCOL protocolMsg, [In] uint idTimer, [In, Out] boolOption showChat) {
             return Addon_API.CMD_RETURN.SUCC;
         }
 #endif
@@ -1377,5 +1377,3 @@ namespace UnitTestCSharp {
         }
     }
 }
-
-
